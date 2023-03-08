@@ -50,7 +50,7 @@ public class Line
         Point = new Point(x, y, z);
         Combinations = new Combinations(combination);
 
-        return true;
+        return Combinations.initializeCombination(combination);
     }
     public Combinations Combinations { get; private set; } = null!;
     public Point Point { get; private set; } = null!;
