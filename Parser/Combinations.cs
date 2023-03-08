@@ -5,9 +5,35 @@ using System.Collections;
 
 public class Combinations
 {
+    private const ushort LineEndingCombination = 39;
+
     public Tuple<string, bool> InitializeCombination(UInt32 combination, int fileLineNumber)
     {
         return ConstructCombinationList(combination, fileLineNumber);
+    }
+
+    public bool IsNotEmptyAndShouldCloseLine()
+    {
+        return !IsEmpty() && ShouldClose();
+    }
+
+    public bool IsEmpty()
+    {
+        return _combinations.Count == 0;
+    }
+
+    public void PopCombination()
+    {
+        if (_combinations.Count > 0)
+        {
+            _combinations.RemoveAt(0);
+        }
+    }
+
+    private bool ShouldClose()
+    {
+        return _combinations[0].Value == LineEndingCombination;
+
     }
 
     public List<Combination> Value
@@ -56,5 +82,6 @@ public class Combinations
 
         return false;
     }
+
     private List<Combination> _combinations;
 }

@@ -33,7 +33,7 @@ public class Tests
 
         Assert.Multiple(() =>
         {
-            Assert.That(line.Initialize(str,0).Item2, Is.EqualTo(true));
+            Assert.That(line.Initialize(str, 0).Item2, Is.EqualTo(true));
             Assert.That(line.Point.X, Is.EqualTo(123.3214f));
             Assert.That(line.Point.Y, Is.EqualTo(231.3214f));
             Assert.That(line.Point.Z, Is.EqualTo(412.3214f));
