@@ -5,11 +5,9 @@ using System.Collections;
 
 public class Combinations
 {
-    public bool InitializeCombination(UInt32 combination)
+    public Tuple<string, bool> InitializeCombination(UInt32 combination, int fileLineNumber)
     {
-        ConstructCombinationList(combination);
-
-        return _combinations != null && _combinations.Count != 0;
+        return ConstructCombinationList(combination, fileLineNumber);
     }
 
     public List<Combination> Value
@@ -17,28 +15,19 @@ public class Combinations
         get { return _combinations; }
     }
 
-    void ConstructCombinationList(UInt32 combination)
+    Tuple<string, bool> ConstructCombinationList(UInt32 combination, int fileLineNumber)
     {
         if (combination == 0)
         {
-            return;
+            return new Tuple<string, bool>(String.Format("Line with number {0} has invalid combination number!", fileLineNumber), false);
         }
 
-        int n = 0;
-        var c = combination;
-        while(c > 0)
+        if (HasOddNumberOfDigits(combination))
         {
-            c = c / 10;
-            ++n;
-        }
-
-        if (n % 2 != 0)
-        {
-            return;
+            return new Tuple<string, bool>(String.Format("Line with number {0}, combination has invalid number of digits!", fileLineNumber), false);
         }
 
         _combinations = new List<Combination>();
-
         while (combination > 0)
         {
             uint mod = combination % 100;
@@ -48,7 +37,24 @@ public class Combinations
         }
 
         _combinations.Reverse();
+        return new Tuple<string, bool>("", true);
     }
-    
+
+    bool HasOddNumberOfDigits(uint number)
+    {
+        int n = 0;
+        while (number > 0)
+        {
+            number = number / 10;
+            ++n;
+        }
+
+        if (n % 2 != 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
     private List<Combination> _combinations;
 }

@@ -17,7 +17,7 @@ public class Tests
         
         Assert.Multiple(() =>
         {
-            Assert.That(line.Initialize(str), Is.EqualTo(true));
+            Assert.That(line.Initialize(str, 0).Item2, Is.EqualTo(true));
             Assert.That(line.Point.X, Is.EqualTo(123));
             Assert.That(line.Point.Y, Is.EqualTo(231));
             Assert.That(line.Point.Z, Is.EqualTo(412));
@@ -33,7 +33,7 @@ public class Tests
 
         Assert.Multiple(() =>
         {
-            Assert.That(line.Initialize(str), Is.EqualTo(true));
+            Assert.That(line.Initialize(str,0).Item2, Is.EqualTo(true));
             Assert.That(line.Point.X, Is.EqualTo(123.3214f));
             Assert.That(line.Point.Y, Is.EqualTo(231.3214f));
             Assert.That(line.Point.Z, Is.EqualTo(412.3214f));
@@ -48,7 +48,7 @@ public class Tests
         var line = new Line();
         Assert.Multiple(() =>
         {
-            Assert.That(line.Initialize(str), Is.EqualTo(false));
+            Assert.That(line.Initialize(str, 0).Item2, Is.EqualTo(false));
         });
     }
     
@@ -59,7 +59,7 @@ public class Tests
         var line = new Line();
         Assert.Multiple(() =>
         {
-            Assert.That(line.Initialize(str), Is.EqualTo(true));
+            Assert.That(line.Initialize(str, 0).Item2, Is.EqualTo(true));
             Assert.That(line.Point.X, Is.EqualTo(123.3214f));
             Assert.That(line.Point.Y, Is.EqualTo(231.3214f));
             Assert.That(line.Point.Z, Is.EqualTo(412.3214f));
@@ -68,7 +68,7 @@ public class Tests
         
         Assert.Multiple(() =>
         {
-            Assert.That(line.Initialize(str), Is.EqualTo(false));
+            Assert.That(line.Initialize(str, 0).Item2, Is.EqualTo(false));
         });
     }
     
@@ -79,7 +79,7 @@ public class Tests
         var line = new Line();
         Assert.Multiple(() =>
         {
-            Assert.That(line.Initialize(str), Is.EqualTo(false));
+            Assert.That(line.Initialize(str, 0).Item2, Is.EqualTo(false));
         });
     }
 }
