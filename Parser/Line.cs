@@ -48,9 +48,9 @@ public class Line
 
         CurrentLineNumber = lineNumber;
         Point = new Point(x, y, z);
-        Combinations = new Combinations(combination);
+        Combinations = new Combinations();
 
-        return Combinations.initializeCombination(combination);
+        return Combinations.InitializeCombination(combination);
     }
     public Combinations Combinations { get; private set; } = null!;
     public Point Point { get; private set; } = null!;

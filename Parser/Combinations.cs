@@ -5,13 +5,9 @@ using System.Collections;
 
 public class Combinations
 {
-    public Combinations(UInt32 combination)
+    public bool InitializeCombination(UInt32 combination)
     {
-    }
-
-    public bool initializeCombination(UInt32 combination)
-    {
-        constructCombinationList(combination);
+        ConstructCombinationList(combination);
 
         return _combinations != null && _combinations.Count != 0;
     }
@@ -21,23 +17,37 @@ public class Combinations
         get { return _combinations; }
     }
 
-    void constructCombinationList(UInt32 combination)
+    void ConstructCombinationList(UInt32 combination)
     {
         if (combination == 0)
         {
             return;
         }
-        _combinations = new List<Combination>();
 
+        int n = 0;
+        var c = combination;
+        while(c > 0)
+        {
+            c = c / 10;
+            ++n;
+        }
+
+        if (n % 2 != 0)
+        {
+            return;
+        }
+
+        _combinations = new List<Combination>();
 
         while (combination > 0)
         {
-            uint mod = combination % 10;
+            uint mod = combination % 100;
             _combinations.Add(new Combination(mod));
 
-            combination = combination / 10;
+            combination = combination / 100;
         }
-        
+
+        _combinations.Reverse();
     }
     
     private List<Combination> _combinations;
