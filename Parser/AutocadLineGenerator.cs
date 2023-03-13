@@ -16,12 +16,8 @@ namespace Parser
 
         public List<List<Point>> getLines(string filePath, Combinations combinationsToExclude)
         {
-            if (filePath == null || File.Exists(filePath))
-            {
-                return null;
-            }
-
-            return _lineCombiner.CombineLines(_lineBuilder.ExtractLinesFromFile(filePath, combinationsToExclude));
+            var lines = _lineBuilder.ExtractLinesFromFile(filePath, combinationsToExclude);
+            return _lineCombiner.CombineLines(lines);
         }
 
         LineBuilder _lineBuilder;

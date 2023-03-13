@@ -31,21 +31,29 @@ namespace Parser
 
                 for (int j = 0; j < linesToCombine.Count; ++j)
                 {
-                    var currentLine        = linesToCombine[j];
-                    var currentCombination = linesToCombine[j].Combinations.Value.First();
+                    if (linesToCombine[j].Combinations.IsEmpty())
+                    {
+                        continue;
+                    }
 
-                    if (currentCombination == combinationToMark)
+                    var currentLine        = linesToCombine[j];
+                    var index = linesToCombine[j].Combinations.HasCombination(combinationToMark.Value);
+
+                    if (index != -1) // combination was found
                     {
                         // One more point that will be drawn
                         line.Add(currentLine.Point);
-
-                        currentLine.Combinations.PopCombination(); // Mark the teritory;
-                        if (currentLine.Combinations.IsNotEmptyAndShouldCloseLine())
+                        bool shouldRemove = currentLine.Combinations.IsClosing(index + 1);
+                        if (shouldRemove)
                         {
+                            // First we remove 39 then we remove normal one
+                            currentLine.Combinations.RemoveAt(index + 1); // Mark the teritory;
                             // As combination states number 39 that means we should stop drawing this line
-                            currentLine.Combinations.PopCombination(); // Mark the teritory;
+                            currentLine.Combinations.RemoveAt(index);
                             break;
                         }
+
+                        currentLine.Combinations.RemoveAt(index);
                     }
                 }
 

@@ -12,9 +12,18 @@ public class Combinations
         return ConstructCombinationList(combination, fileLineNumber);
     }
 
-    public bool IsNotEmptyAndShouldCloseLine()
+    public void RemoveAt(int index)
     {
-        return !IsEmpty() && ShouldClose();
+        _combinations.RemoveAt(index);
+    }
+    public int HasCombination(uint combination)
+    {
+        return _combinations.FindIndex(x => x.Value == combination); 
+    }
+
+    public bool IsClosing(int index)
+    {
+        return _combinations[index].Value == 39;
     }
 
     public bool IsEmpty()
